@@ -3,6 +3,7 @@ import os
 import pytest
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from main import artcode_i, artcode_r
+sys.setrecursionlimit(1000000)
 
 WWF_input = """
 MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMKo,.   .:dOWMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
@@ -119,11 +120,11 @@ def test_iterative(input, expected):
 
 @pytest.mark.parametrize("input,expected", input_output)
 def test_recursive(input, expected):
-    assert artcode_r(input) == expected, input
+    assert artcode_r(input,lst=None) == expected, input
 
 def test_misc():
     assert artcode_i(WWF_input) == WWF_output 
     assert artcode_r(WWF_input) == WWF_output 
     assert artcode_i(APPLE_input) == APPLE_output 
-    assert artcode_r(APPLE_input) == APPLE_output 
+    assert artcode_r(APPLE_input,lst=None) == APPLE_output 
 
