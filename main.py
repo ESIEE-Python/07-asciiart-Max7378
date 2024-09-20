@@ -1,47 +1,46 @@
-#### Imports et définition des variables globales
-
-
-#### Fonctions secondaires
-
+"""fonctions encodage Artcode"""
 
 def artcode_i(s):
-    """retourne la liste de tuples encodant une chaîne de caractères passée en argument selon un algorithme itératif
+    """fonction itérative"""
+    k=0
+    lst=[]
+    count=0
+    for i, char in enumerate(s):
+        if char == s[k]:
+            count+=1
+        else:
+            lst.append((s[k],count))
+            k=i
+            count=1
+    lst.append((s[k],count))
+    return lst
 
-    Args:
-        s (str): la chaîne de caractères à encoder
-
-    Returns:
-        list: la liste des tuples (caractère, nombre d'occurences)
-    """
-    
-    # votre code ici
-
-    return [ ]
 
 
-def artcode_r(s):
-    """retourne la liste de tuples encodant une chaîne de caractères passée en argument selon un algorithme récursif
+def artcode_r(s, lst=None):
+    """fonction récursive"""
+    if lst is None:
+        lst=[]
+    if len(s) == 0:
+        return lst
+    char = s[0]
+    count = 1
+    for i in range(1, len(s)):
+        if s[i] == char:
+            count += 1
+        else:
+            break
+    lst.append((char, count))
+    return artcode_r(s[count:], lst)
 
-    Args:
-        s (str): la chaîne de caractères à encoder
 
-    Returns:
-        list: la liste des tuples (caractère, nombre d'occurences)
-    """
-    
-    # votre code ici
 
-    # cas de base
-    # recherche nombre de caractères identiques au premier
-    # appel récursif
-
-    return []
-    
 
 #### Fonction principale
 
 
 def main():
+    """utilise les fonctions secondaires"""
     print(artcode_i('MMMMaaacXolloMM'))
     print(artcode_r('MMMMaaacXolloMM'))
 
